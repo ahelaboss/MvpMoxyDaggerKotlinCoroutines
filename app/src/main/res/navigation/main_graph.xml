@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/main_graph"
+            app:startDestination="@id/firstFragment">
+
+    <fragment
+            android:id="@+id/firstFragment"
+            android:name="com.yourgains.mvpmoxydaggertemplate.presentation.ui.main.fragments.FirstFragment"
+            android:label="FirstFragment"
+            tools:layout="@layout/fragment_first">
+
+        <action
+                android:id="@+id/action_firstFragment_to_secondFragment"
+                app:destination="@id/secondFragment"
+                app:popUpTo="@+id/firstFragment"
+                app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/secondFragment"
+            android:name="com.yourgains.mvpmoxydaggertemplate.presentation.ui.main.fragments.SecondFragment"
+            android:label="SecondFragment"
+            tools:layout="@layout/fragment_second"/>
+
+</navigation>
