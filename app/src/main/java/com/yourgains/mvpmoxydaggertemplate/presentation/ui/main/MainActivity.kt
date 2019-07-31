@@ -1,6 +1,5 @@
 package com.yourgains.mvpmoxydaggertemplate.presentation.ui.main
 
-import android.util.Log
 import com.yourgains.mvpmoxydaggertemplate.R
 import com.yourgains.mvpmoxydaggertemplate.presentation.mvpview.main.IMainView
 import com.yourgains.mvpmoxydaggertemplate.presentation.presenter.main.MainPresenter

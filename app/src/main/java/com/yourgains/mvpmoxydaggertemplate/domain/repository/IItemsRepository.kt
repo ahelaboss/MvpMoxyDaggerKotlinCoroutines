@@ -2,6 +2,7 @@ package com.yourgains.mvpmoxydaggertemplate.domain.repository
 
 import androidx.lifecycle.LiveData
 import com.yourgains.mvpmoxydaggertemplate.data.entity.db.ItemDBModel
+import io.reactivex.Flowable
 
 /**
  * Created by Alexey Shishov
@@ -15,5 +16,7 @@ interface IItemsRepository {
 
     suspend fun clear()
 
-    fun observe(): LiveData<List<ItemDBModel>>
+    fun observeLiveData(): LiveData<List<ItemDBModel>>
+
+    fun observeReceiveChannel(): Flowable<List<ItemDBModel>>
 }

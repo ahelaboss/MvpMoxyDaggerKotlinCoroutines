@@ -6,6 +6,7 @@ import com.yourgains.mvpmoxydaggertemplate.data.entity.mappers.DbModelMapper
 import com.yourgains.mvpmoxydaggertemplate.data.network.IApiRepository
 import com.yourgains.mvpmoxydaggertemplate.data.storage.database.dao.IItemsDao
 import com.yourgains.mvpmoxydaggertemplate.domain.repository.IItemsRepository
+import io.reactivex.Flowable
 import javax.inject.Inject
 
 /**
@@ -31,5 +32,7 @@ class ItemsRepository @Inject constructor(
         itemsDao.clear()
     }
 
-    override fun observe(): LiveData<List<ItemDBModel>> = itemsDao.observe()
+    override fun observeLiveData(): LiveData<List<ItemDBModel>> = itemsDao.observeLiveData()
+
+    override fun observeReceiveChannel(): Flowable<List<ItemDBModel>> = itemsDao.observeCoroutine()
 }

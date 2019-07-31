@@ -3,6 +3,7 @@ package com.yourgains.mvpmoxydaggertemplate.data.storage.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.yourgains.mvpmoxydaggertemplate.data.entity.db.ItemDBModel
+import io.reactivex.Flowable
 
 /**
  * Created by Alexey Shishov
@@ -33,5 +34,8 @@ interface IItemsDao {
     suspend fun getById(id: Int): ItemDBModel
 
     @Query("SELECT * FROM items ORDER BY name")
-    fun observe():LiveData<List<ItemDBModel>>
+    fun observeLiveData(): LiveData<List<ItemDBModel>>
+
+    @Query("SELECT * FROM items ORDER BY name")
+    fun observeCoroutine(): Flowable<List<ItemDBModel>>
 }

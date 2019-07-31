@@ -17,6 +17,6 @@ class ObserveItemsUseCase @Inject constructor(
 ) : BaseObserveUseCase<List<ItemUIModel>>() {
 
     override fun observe(): LiveData<List<ItemUIModel>> =
-        Transformations.map(itemsRepository.observe()) { list -> list.map { UiModelMapper.map(it) } }
+        Transformations.map(itemsRepository.observeLiveData()) { list -> list.map { UiModelMapper.map(it) } }
 
 }
