@@ -13,7 +13,7 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseObserveCoroutinesUseCase<T> : CoroutineScope {
 
     private var parentJob: Job = Job()
-    override val coroutineContext: CoroutineContext = parentJob + Dispatchers.IO
+    override val coroutineContext: CoroutineContext = parentJob + Dispatchers.Main
 
     protected abstract fun observe(): ReceiveChannel<T>
 

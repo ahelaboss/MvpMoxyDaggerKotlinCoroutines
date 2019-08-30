@@ -3,7 +3,6 @@ package com.yourgains.mvpmoxydaggertemplate.presentation.presenter.main
 import com.yourgains.mvpmoxydaggertemplate.data.entity.presentation.ItemUIModel
 import com.yourgains.mvpmoxydaggertemplate.domain.usercase.items.GetItemsUseCase
 import com.yourgains.mvpmoxydaggertemplate.domain.usercase.items.ObserveChannelItemsUseCase
-import com.yourgains.mvpmoxydaggertemplate.domain.usercase.items.ObserveItemsUseCase
 import com.yourgains.mvpmoxydaggertemplate.presentation.mvpview.main.IFirstView
 import com.yourgains.mvpmoxydaggertemplate.presentation.presenter.BasePresenter
 import kotlinx.coroutines.channels.actor
@@ -15,8 +14,7 @@ import javax.inject.Inject
 @InjectViewState
 class FirstPresenter @Inject constructor(
     private val getItemsUseCase: GetItemsUseCase,
-    private val observeChannelItemUserCase: ObserveChannelItemsUseCase,
-    private val observeItemsUseCase: ObserveItemsUseCase
+    private val observeChannelItemUserCase: ObserveChannelItemsUseCase
 ) : BasePresenter<IFirstView>() {
 
     private val observeActor = actor<List<ItemUIModel>>(coroutineContext) {

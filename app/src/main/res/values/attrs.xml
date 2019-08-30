@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundedImageView">
+
+        <attr name="corner_radius" format="float" />
+        <attr name="make_circle" format="boolean" />
+
+    </declare-styleable>
+
+</resources>

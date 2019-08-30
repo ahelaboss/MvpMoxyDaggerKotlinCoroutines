@@ -1,5 +1,6 @@
 package com.yourgains.mvpmoxydaggertemplate.domain.usercase
 
+import android.accounts.NetworkErrorException
 import com.yourgains.mvpmoxydaggertemplate.domain.usercase.blocks.CompletionBlock
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -13,8 +14,8 @@ import kotlin.coroutines.CoroutineContext
 abstract class BaseCoroutinesUseCase<T> {
 
     private var parentJob: Job = Job()
-    var backgroundContext: CoroutineContext = Dispatchers.IO
-    var foregroundContext: CoroutineContext = Dispatchers.Main
+    private var backgroundContext: CoroutineContext = Dispatchers.IO
+    private var foregroundContext: CoroutineContext = Dispatchers.Main
 
     protected abstract suspend fun executeOnBackground(): T
 
@@ -30,6 +31,8 @@ abstract class BaseCoroutinesUseCase<T> {
                 response(result)
             } catch (ex: CancellationException) {
                 response(ex)
+            } catch (ex: NetworkErrorException) {
+
             } catch (ex: HttpException) {
                 response(ex)
             } catch (ex: Exception) {
