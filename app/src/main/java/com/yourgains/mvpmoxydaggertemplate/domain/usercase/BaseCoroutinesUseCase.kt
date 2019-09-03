@@ -1,6 +1,9 @@
 package com.yourgains.mvpmoxydaggertemplate.domain.usercase
 
 import android.accounts.NetworkErrorException
+import com.google.gson.Gson
+import com.yourgains.mvpmoxydaggertemplate.data.entity.network.ErrorResponse
+import com.yourgains.mvpmoxydaggertemplate.data.entity.presentation.NetworkErrorUiModel
 import com.yourgains.mvpmoxydaggertemplate.domain.usercase.blocks.CompletionBlock
 import kotlinx.coroutines.*
 import retrofit2.HttpException
@@ -31,10 +34,16 @@ abstract class BaseCoroutinesUseCase<T> {
                 response(result)
             } catch (ex: CancellationException) {
                 response(ex)
-            } catch (ex: NetworkErrorException) {
-
             } catch (ex: HttpException) {
-                response(ex)
+                val responseBody = ex.response().errorBody()
+                val error = if (responseBody?.contentType()?.subtype() == "json") {
+                    val errorResponse =
+                        Gson().fromJson(responseBody.string(), ErrorResponse::class.java)
+                    NetworkErrorUiModel(ex.code(), errorResponse.message)
+                } else {
+                    NetworkErrorUiModel(ex.code(), ex.message())
+                }
+                response(error)
             } catch (ex: Exception) {
                 response(ex)
             }
@@ -50,7 +59,7 @@ abstract class BaseCoroutinesUseCase<T> {
 
     class Request<T> {
         private var onComplete: ((T) -> Unit)? = null
-        private var onNetworkError: ((HttpException) -> Unit)? = null
+        private var onNetworkError: ((NetworkErrorUiModel) -> Unit)? = null
         private var onError: ((Exception) -> Unit)? = null
         private var onCancel: ((CancellationException) -> Unit)? = null
 
@@ -58,7 +67,7 @@ abstract class BaseCoroutinesUseCase<T> {
             onComplete = block
         }
 
-        fun onNetworkError(block: (HttpException) -> Unit) {
+        fun onNetworkError(block: (NetworkErrorUiModel) -> Unit) {
             onNetworkError = block
         }
 
@@ -74,7 +83,7 @@ abstract class BaseCoroutinesUseCase<T> {
             onComplete?.invoke(result)
         }
 
-        operator fun invoke(error: HttpException) {
+        operator fun invoke(error: NetworkErrorUiModel) {
             onNetworkError?.invoke(error)
         }
 

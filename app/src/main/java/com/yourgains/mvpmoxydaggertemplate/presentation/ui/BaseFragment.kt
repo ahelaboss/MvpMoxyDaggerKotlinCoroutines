@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.annotation.StringRes
 import androidx.navigation.NavDirections
 import com.yourgains.mvpmoxydaggertemplate.R
 import com.yourgains.mvpmoxydaggertemplate.presentation.mvpview.IBaseMvpView
@@ -22,9 +23,11 @@ abstract class BaseFragment : DaggerFragment(), IBaseMvpView {
         getMvpDelegate().onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(getLayoutId(), container, false)
-    }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = inflater.inflate(getLayoutId(), container, false)
 
     override fun onStart() {
         super.onStart()
@@ -83,10 +86,11 @@ abstract class BaseFragment : DaggerFragment(), IBaseMvpView {
     @LayoutRes
     abstract fun getLayoutId(): Int
 
-    private fun getBaseActivity(): BaseActivity? = if (activity is BaseActivity) activity as BaseActivity else null
+    private fun getBaseActivity(): BaseActivity? =
+        if (activity is BaseActivity) activity as BaseActivity else null
 
     protected fun notImplementedToast() {
-        activity?.let { Toast.makeText(it, R.string.not_implemented, Toast.LENGTH_SHORT).show()}
+        activity?.let { Toast.makeText(it, R.string.not_implemented, Toast.LENGTH_SHORT).show() }
     }
 
     fun navigate(id: Int, bundle: Bundle? = null) {
@@ -109,6 +113,34 @@ abstract class BaseFragment : DaggerFragment(), IBaseMvpView {
 
     override fun hideProgressDialog() {
 
+    }
+
+    override fun showErrorToast(error: String) {
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
+    protected fun showAppBar() {
+        getBaseActivity()?.showAppBar()
+    }
+
+    protected fun hideAppBar() {
+        getBaseActivity()?.hideAppBar()
+    }
+
+    protected fun setAppBarTitle(@StringRes titleResId: Int) {
+        getBaseActivity()?.setAppBarTitle(titleResId)
+    }
+
+    protected fun setAppBarTitle(title: String) {
+        getBaseActivity()?.setAppBarTitle(title)
+    }
+
+    protected fun lockDrawerLayout() {
+        getBaseActivity()?.lockDrawerLayout()
+    }
+
+    protected fun unlockDrawerLayout() {
+        getBaseActivity()?.unlockDrawerLayout()
     }
 
     fun getMvpDelegate(): MvpDelegate<*> {

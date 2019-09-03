@@ -8,4 +8,6 @@ interface IBaseMvpView: MvpView {
 
     fun hideProgressDialog()
 
+    fun showErrorToast(error: String)
+
 }
