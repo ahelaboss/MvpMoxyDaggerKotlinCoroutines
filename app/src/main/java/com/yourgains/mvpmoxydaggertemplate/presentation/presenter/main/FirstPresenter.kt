@@ -39,7 +39,7 @@ class FirstPresenter @Inject constructor(
                 Timber.e("onComplete: %s", it.size)
             }
 
-            onNetworkError { Timber.e(it) }
+            onNetworkError { Timber.e(it.toString()) }
             onError { Timber.e(it) }
         }
     }

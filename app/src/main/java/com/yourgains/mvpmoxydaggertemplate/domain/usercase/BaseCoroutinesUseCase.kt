@@ -1,12 +1,13 @@
 package com.yourgains.mvpmoxydaggertemplate.domain.usercase
 
-import android.accounts.NetworkErrorException
 import com.google.gson.Gson
 import com.yourgains.mvpmoxydaggertemplate.data.entity.network.ErrorResponse
 import com.yourgains.mvpmoxydaggertemplate.data.entity.presentation.NetworkErrorUiModel
 import com.yourgains.mvpmoxydaggertemplate.domain.usercase.blocks.CompletionBlock
 import kotlinx.coroutines.*
 import retrofit2.HttpException
+import timber.log.Timber
+import java.net.ConnectException
 import kotlin.coroutines.CoroutineContext
 
 /**
@@ -33,9 +34,13 @@ abstract class BaseCoroutinesUseCase<T> {
                 }
                 response(result)
             } catch (ex: CancellationException) {
+                Timber.d(ex)
                 response(ex)
+            } catch (ex: ConnectException) {
+                Timber.e(ex)
+                response(NetworkErrorUiModel(0, ex.message))
             } catch (ex: HttpException) {
-                val responseBody = ex.response().errorBody()
+                val responseBody = ex.response()?.errorBody()
                 val error = if (responseBody?.contentType()?.subtype() == "json") {
                     val errorResponse =
                         Gson().fromJson(responseBody.string(), ErrorResponse::class.java)
@@ -43,8 +48,10 @@ abstract class BaseCoroutinesUseCase<T> {
                 } else {
                     NetworkErrorUiModel(ex.code(), ex.message())
                 }
+                Timber.e(error.toString())
                 response(error)
             } catch (ex: Exception) {
+                Timber.e(ex)
                 response(ex)
             }
         }
