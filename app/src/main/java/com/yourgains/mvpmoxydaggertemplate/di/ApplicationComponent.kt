@@ -3,6 +3,7 @@ package com.yourgains.mvpmoxydaggertemplate.di
 import android.app.Application
 import android.content.Context
 import com.yourgains.mvpmoxydaggertemplate.App
+import com.yourgains.mvpmoxydaggertemplate.data.storage.preference.TokenPreferenceHelper
 import com.yourgains.mvpmoxydaggertemplate.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
@@ -28,4 +29,6 @@ interface ApplicationComponent : AndroidInjector<App> {
     }
 
     fun context(): Context
+
+    fun getTokenPreferenceHelper(): TokenPreferenceHelper
 }

@@ -2,11 +2,12 @@ package com.yourgains.mvpmoxydaggertemplate.di.modules
 
 import android.text.format.DateUtils
 import com.google.gson.Gson
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.yourgains.mvpmoxydaggertemplate.BuildConfig
-import com.yourgains.mvpmoxydaggertemplate.data.network.ApiRepository
-import com.yourgains.mvpmoxydaggertemplate.data.network.IApiRepository
-import com.yourgains.mvpmoxydaggertemplate.data.network.services.ApiServices
+import com.yourgains.mvpmoxydaggertemplate.data.network.adapter.NullBodyCoroutineCallAdapterFactory
+import com.yourgains.mvpmoxydaggertemplate.data.network.interceptor.AuthHeaderInterceptor
+import com.yourgains.mvpmoxydaggertemplate.data.network.services.APIAuthServices
+import com.yourgains.mvpmoxydaggertemplate.data.network.services.APIServices
+import com.yourgains.mvpmoxydaggertemplate.data.storage.preference.TokenPreferenceHelper
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -33,7 +34,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(tokenHelper: TokenPreferenceHelper): OkHttpClient {
         val client = OkHttpClient.Builder()
             .connectTimeout(DateUtils.MINUTE_IN_MILLIS, TimeUnit.MILLISECONDS)
             .writeTimeout(DateUtils.MINUTE_IN_MILLIS, TimeUnit.MILLISECONDS)
@@ -42,6 +43,7 @@ class NetworkModule {
         interceptor.level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
         client.addInterceptor(interceptor)
+        client.addInterceptor(AuthHeaderInterceptor(tokenHelper))
         return client.build()
     }
 
@@ -53,15 +55,17 @@ class NetworkModule {
     ): Retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(factory)
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addCallAdapterFactory(NullBodyCoroutineCallAdapterFactory())
         .client(client)
         .build()
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit): ApiServices = retrofit.create(ApiServices::class.java)
+    fun provideApiService(retrofit: Retrofit): APIServices =
+        retrofit.create(APIServices::class.java)
 
     @Provides
     @Singleton
-    fun provideApiRepository(apiServices: ApiServices): IApiRepository = ApiRepository(apiServices)
+    fun provideApiAuthServices(retrofit: Retrofit): APIAuthServices =
+        retrofit.create(APIAuthServices::class.java)
 }

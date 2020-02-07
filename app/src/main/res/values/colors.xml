@@ -3,4 +3,18 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="hint">@color/white65</color>
+    <color name="error">#FF0000</color>
+
+    <color name="white">#FFFFFFFF</color>
+    <color name="white20">#26FFFFFF</color>
+    <color name="white30">#4DFFFFFF</color>
+    <color name="white40">#66FFFFFF</color>
+    <color name="white65">#A6FFFFFF</color>
+    <color name="black">#FF020202</color>
+    <color name="black20">#26020202</color>
+    <color name="black50">#80020202</color>
+    <color name="transparent">#00000000</color>
+    <color name="charcoal">#FF323F52</color>
 </resources>

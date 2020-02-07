@@ -2,10 +2,14 @@
 <resources>
 
     <declare-styleable name="RoundedImageView">
-
         <attr name="corner_radius" format="float" />
         <attr name="make_circle" format="boolean" />
+    </declare-styleable>
 
+    <declare-styleable name="DesignSearchView">
+        <attr name="design_search_view_background" format="reference" />
+        <attr name="design_search_view_action_icon" format="reference" />
+        <attr name="design_search_view_hint" format="reference" />
     </declare-styleable>
 
 </resources>

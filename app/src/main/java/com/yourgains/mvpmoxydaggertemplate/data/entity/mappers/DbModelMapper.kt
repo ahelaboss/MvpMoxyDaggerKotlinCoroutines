@@ -1,7 +1,7 @@
 package com.yourgains.mvpmoxydaggertemplate.data.entity.mappers
 
 import com.yourgains.mvpmoxydaggertemplate.data.entity.db.ItemDBModel
-import com.yourgains.mvpmoxydaggertemplate.data.entity.network.ItemResponse
+import com.yourgains.mvpmoxydaggertemplate.data.entity.network.response.ItemResponse
 import com.yourgains.mvpmoxydaggertemplate.data.entity.presentation.ItemUIModel
 
 /**

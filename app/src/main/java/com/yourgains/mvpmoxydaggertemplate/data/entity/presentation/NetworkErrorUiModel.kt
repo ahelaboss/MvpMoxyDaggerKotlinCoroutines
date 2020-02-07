@@ -1,35 +1,14 @@
 package com.yourgains.mvpmoxydaggertemplate.data.entity.presentation
 
-import android.os.Parcel
-import android.os.Parcelable
+import com.yourgains.mvpmoxydaggertemplate.common.NetworkUtils.ERROR_ACCESS_DENIED
+import com.yourgains.mvpmoxydaggertemplate.data.network.error.VariableError
 
 data class NetworkErrorUiModel(
     val code: Int,
-    val message: String? = null
-) : Parcelable {
+    val message: String? = null,
+    val variableError: VariableError? = null
+) {
 
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString()
-    )
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(code)
-        parcel.writeString(message)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<NetworkErrorUiModel> {
-        override fun createFromParcel(parcel: Parcel): NetworkErrorUiModel {
-            return NetworkErrorUiModel(parcel)
-        }
-
-        override fun newArray(size: Int): Array<NetworkErrorUiModel?> {
-            return arrayOfNulls(size)
-        }
-    }
+    fun isTokenExpireError(): Boolean = code == ERROR_ACCESS_DENIED
 
 }

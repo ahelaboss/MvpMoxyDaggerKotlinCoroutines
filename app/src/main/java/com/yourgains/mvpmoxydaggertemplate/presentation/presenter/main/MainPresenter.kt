@@ -5,6 +5,4 @@ import com.yourgains.mvpmoxydaggertemplate.presentation.presenter.BasePresenter
 import moxy.InjectViewState
 
 @InjectViewState
-class MainPresenter() : BasePresenter<IMainView>() {
-
-}
+class MainPresenter : BasePresenter<IMainView>()

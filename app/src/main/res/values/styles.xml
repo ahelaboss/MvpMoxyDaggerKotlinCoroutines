@@ -7,11 +7,90 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="ToolbarText">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextRegular"></style>
+
+    <style name="TextRegular.Tiny">
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+    <style name="TextRegular.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="TextRegular.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextRegular.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextRegular.Small.AppCompatEditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/white30</item>
+    </style>
+
+    <style name="TextBold"></style>
+
+    <style name="TextBold.Tiny">
+        <item name="android:textSize">@dimen/text_size_tiny</item>
+    </style>
+
+    <style name="TextBold.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="TextBold.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextBold.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextMedium"></style>
+
+    <style name="TextMedium.Small">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="TextMedium.Medium">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextMedium.Normal">
+        <item name="android:textSize">@dimen/text_size_normal</item>
+    </style>
+
+    <style name="TextMedium.AppCompatEditText">
+        <item name="android:backgroundTint">@color/charcoal</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:paddingBottom">@dimen/padding_large</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+        <item name="android:textColorHint">@color/hint</item>
+    </style>
+
+    <style name="TextMedium.Small.AppCompatEditText">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textColorHint">@color/hint</item>
+    </style>
 
 </resources>

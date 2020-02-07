@@ -5,7 +5,7 @@ import com.yourgains.mvpmoxydaggertemplate.presentation.presenter.BasePresenter
 import moxy.InjectViewState
 
 @InjectViewState
-class SecondPresenter(): BasePresenter<ISecondView>() {
+class SecondPresenter : BasePresenter<ISecondView>() {
 
     fun close(){
         viewState.onClose()

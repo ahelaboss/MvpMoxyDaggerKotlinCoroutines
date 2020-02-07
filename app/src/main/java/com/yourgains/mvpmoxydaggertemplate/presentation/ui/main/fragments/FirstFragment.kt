@@ -3,12 +3,14 @@ package com.yourgains.mvpmoxydaggertemplate.presentation.ui.main.fragments
 import android.os.Bundle
 import android.view.View
 import com.yourgains.mvpmoxydaggertemplate.R
+import com.yourgains.mvpmoxydaggertemplate.data.entity.presentation.ItemUIModel
 import com.yourgains.mvpmoxydaggertemplate.presentation.mvpview.main.IFirstView
 import com.yourgains.mvpmoxydaggertemplate.presentation.presenter.main.FirstPresenter
 import com.yourgains.mvpmoxydaggertemplate.presentation.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_first.*
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
+import timber.log.Timber
 import javax.inject.Inject
 
 class FirstFragment : BaseFragment(), IFirstView {
@@ -27,6 +29,22 @@ class FirstFragment : BaseFragment(), IFirstView {
 
     override fun onNavigateToSecond() {
         navigate(R.id.action_firstFragment_to_secondFragment)
+    }
+
+    override fun initItems(list: List<ItemUIModel>) {
+        Timber.e("Init items")
+    }
+
+    override fun loadMoreItems(list: List<ItemUIModel>) {
+        Timber.e("Load more items")
+    }
+
+    override fun showEmptyState() {
+        Timber.e("Show empty view")
+    }
+
+    override fun hideEmptyState() {
+        Timber.e("Hide empty view")
     }
 
     @ProvidePresenter

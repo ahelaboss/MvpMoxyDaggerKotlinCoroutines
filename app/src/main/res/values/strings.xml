@@ -5,6 +5,7 @@
     <string name="close_second_fragment">Close Second Fragment</string>
 
     <string name="not_implemented">Not implemented</string>
+    <string name="network_connecting">Connecting…</string>
 
     <string name="permission_cancel">Cancel</string>
     <string name="permission_settings">Settings</string>

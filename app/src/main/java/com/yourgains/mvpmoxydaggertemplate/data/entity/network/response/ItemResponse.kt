@@ -1,4 +1,4 @@
-package com.yourgains.mvpmoxydaggertemplate.data.entity.network
+package com.yourgains.mvpmoxydaggertemplate.data.entity.network.response
 
 import com.google.gson.annotations.SerializedName
 
