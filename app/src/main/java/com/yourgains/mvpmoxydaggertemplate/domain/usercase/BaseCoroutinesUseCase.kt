@@ -91,7 +91,7 @@ abstract class BaseCoroutinesUseCase<T> {
 
     private fun getError(ex: HttpException): NetworkErrorUiModel {
         val responseBody = ex.response()?.errorBody()
-        return takeIf { responseBody?.contentType()?.subtype() == "json" }?.let {
+        return takeIf { responseBody?.contentType()?.subtype == "json" }?.let {
             try {
                 val gson = GsonBuilder().registerTypeAdapter(
                     VariableError::class.java,

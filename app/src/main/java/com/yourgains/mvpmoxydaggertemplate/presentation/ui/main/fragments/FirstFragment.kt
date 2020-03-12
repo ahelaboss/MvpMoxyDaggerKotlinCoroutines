@@ -19,6 +19,7 @@ class FirstFragment : BaseFragment(), IFirstView {
     @InjectPresenter
     lateinit var presenter: FirstPresenter
 
+
     override fun getLayoutId(): Int = R.layout.fragment_first
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
